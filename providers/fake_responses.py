@@ -7,7 +7,7 @@ from utils.xml_parser import XMLParser
 
 class FakeResponses:
     @staticmethod
-    def events_urls(date:datetime):
+    def events_urls(date: datetime):
         dates_urls = {
             "2021-02-09": (
                 "https://gist.githubusercontent.com/miguelgf/"

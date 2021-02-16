@@ -24,11 +24,12 @@ class FakeProvider:
         return FakeProvider.get_unique_most_recent_events(events)
 
     @staticmethod
-    def get_events_on_date(date: datetime) -> Optional[EventList]:
+    def get_events_on_date(date: datetime) -> EventList:
         response = FakeProvider.request_events(date)
-        if response is None or response.status_code != 200:
-            return None
-        return XMLParser.parse_text_on_date(response.content, date)
+        events = []
+        if response is not None and response.status_code == 200:
+            events = XMLParser.parse_text_on_date(response.content, date)
+        return events
 
     @staticmethod
     def request_events(date: datetime) -> Optional[Response]:

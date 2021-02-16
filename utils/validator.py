@@ -34,9 +34,9 @@ class Validator:
         # for internal use we allow a 10 days range creation
         ends_at = starts_at + timedelta(days=days-1) if not ends_at else ends_at
 
-        delta = Validator.delta(ends_at, starts_at)
+        delta = Validator.delta(starts_at, ends_at, )
         return [(ends_at - timedelta(days=i)) for i in range(delta.days + 1)]
 
     @staticmethod
-    def delta(ends_at: datetime, starts_at: datetime) -> timedelta:
+    def delta(starts_at: datetime,ends_at: datetime) -> timedelta:
         return abs(ends_at - starts_at)

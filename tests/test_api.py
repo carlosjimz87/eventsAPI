@@ -7,7 +7,7 @@ from tests.test_data import TestData
 class TestAPI(TestCase):
 
     def test_get_available_events(self):
-        events = EventsApi.get_available_events(TestData.STARTS_AT, TestData.ENDS_AT)
+        events = EventsApi().get_available_events(TestData.STARTS_AT, TestData.ENDS_AT)
 
         self.assertNotEqual(events, None)
         self.assertEqual(3, len(events))
