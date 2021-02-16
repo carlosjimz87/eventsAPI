@@ -9,3 +9,6 @@ class BaseResponse(BaseModel):
 
     data: Optional[EventList]
     error: Literal[None] = Field(None)
+
+    class Config:
+        keep_untouched: True

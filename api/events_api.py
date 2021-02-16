@@ -3,6 +3,8 @@ import concurrent.futures
 from datetime import datetime
 from typing import List, Union
 
+import nest_asyncio
+
 from models.events import EventList
 from providers.fake_provider import FakeProvider
 from utils.validator import Validator
@@ -23,6 +25,7 @@ class EventsApi:
         query_dates = Validator.range_of_dates(starts_at, ends_at)
 
         if self.use_workers:
+            nest_asyncio.apply()
             # retrieve filtered events of most recent dates - asynchronously
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)

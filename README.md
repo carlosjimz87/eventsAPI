@@ -69,7 +69,7 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 - [X] Basic API with basic XML parsing.
 - [X] Initial refactoring for better scalability.
 - [X] Complete XML parsing.
-- [ ] Asynchronous request to external provider.
+- [X] Asynchronous request to external provider.
 - [X] Adapt API to Open API spec.
 - [X] Online events filtering.
 - [X] Most recent events filtering.
@@ -77,10 +77,10 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 - [X] Complete routes endpoints and not-founds.
 - [/] Error handling and output messages.
 - [/] Testing and mocking.
-- [ ] Final refactoring for better scalability.
-- [ ] Code styling, comments, and other improvements.
+- [/] Final refactoring for better scalability.
+- [/] Code styling, comments, and other improvements.
 - [ ] Github actions.
-- [ ] Deployment setup.
+- [X] Deployment setup.
 - [X] Performance recommendations.
 - [ ] Security recommendations.
 - [ ] Complete documentation.
