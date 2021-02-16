@@ -1,7 +1,8 @@
 import asyncio
 import concurrent.futures
 from datetime import datetime
-from typing import Union, List
+from typing import List, Union
+
 from models.events import EventList
 from providers.fake_provider import FakeProvider
 from utils.validator import Validator
@@ -12,7 +13,9 @@ class EventsApi:
         self.max_workers = max_workers
         self.use_workers = use_workers
 
-    def get_available_events(self, starts_at: Union[str, datetime], ends_at: Union[str, datetime]) -> EventList:
+    def get_available_events(
+        self, starts_at: Union[str, datetime], ends_at: Union[str, datetime]
+    ) -> EventList:
         starts_at = Validator.is_valid_date(starts_at)
         ends_at = Validator.is_valid_date(ends_at)
 
@@ -33,7 +36,7 @@ class EventsApi:
     async def async_request(self, dates_to_query: List[datetime]) -> EventList:
         events = []
         with concurrent.futures.ThreadPoolExecutor(
-                max_workers=self.max_workers
+            max_workers=self.max_workers
         ) as executor:
             loop = asyncio.get_event_loop()
             futures = [
