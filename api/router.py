@@ -19,7 +19,7 @@ router = APIRouter()
     response_model=BaseResponse,
     responses={400: {"model": GenericError}, 500: {"model": GenericError}},
 )
-async def search(
+def search(
     starts_at: Optional[datetime] = StartsSearchQuery,
     ends_at: Optional[datetime] = EndsSearchQuery,
 ):

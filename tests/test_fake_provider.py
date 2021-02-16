@@ -8,7 +8,6 @@ from utils.xml_parser import XMLParser
 
 
 class TestFakeProvider(TestCase):
-
     def test_get_events_on_dates(self):
         # arrange
         start_at = TestData.STARTS_AT
@@ -18,11 +17,14 @@ class TestFakeProvider(TestCase):
         events = FakeProvider.get_events_on_dates(date_list)
         # assert
         self.assertNotEqual(events, None)
-        self.assertEqual(3, len(events))
+        self.assertEqual(7, len(events))
 
         self.assertEqual("291", events[0].base_event_id)
         self.assertEqual("1591", events[1].base_event_id)
-        self.assertEqual("322", events[2].base_event_id)
+        self.assertEqual("291", events[2].base_event_id)
+        self.assertEqual("291", events[4].base_event_id)
+        self.assertEqual("322", events[5].base_event_id)
+        self.assertEqual("1591", events[6].base_event_id)
 
     def test_get_events_on_date(self):
         # arrange
@@ -62,7 +64,7 @@ class TestFakeProvider(TestCase):
     Here the same test but using Mocks
     """
 
-    @patch('providers.fake_provider.FakeProvider.request_events')
+    @patch("providers.fake_provider.FakeProvider.request_events")
     def test_request_events_with_mock(self, request_events):
         # arrange
         date = TestData.EVENT_DATE

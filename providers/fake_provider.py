@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List, Optional, Dict
+from typing import Dict, List, Optional
 
 import requests
 from requests import Response
@@ -21,7 +21,7 @@ class FakeProvider:
             event = FakeProvider.get_events_on_date(date)
             if event is not None:
                 events.extend(event)
-        return FakeProvider.get_unique_most_recent_events(events)
+        return events
 
     @staticmethod
     def get_events_on_date(date: datetime) -> EventList:
@@ -45,7 +45,6 @@ class FakeProvider:
         #     raise Exception(f"Server not responding")
         # except requests.exceptions.RequestException:
         #     raise Exception(f"Server not responding")
-
 
     @staticmethod
     def get_unique_most_recent_events(events: EventList) -> EventList:
