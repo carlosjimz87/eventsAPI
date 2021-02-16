@@ -1,16 +1,18 @@
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, Dict
 
 import requests
 from requests import Response
 from requests.exceptions import MissingSchema
 
-from models.events import EventList
+from models.events import EventList, EventSummary
 from providers.fake_responses import FakeResponses
 from utils.xml_parser import XMLParser
 
 
 class FakeProvider:
+    def __init__(self, max_workers: int = 4) -> None:
+        self.max_workers = max_workers
 
     @staticmethod
     def get_events_on_dates(query_dates: List[datetime]):
@@ -19,7 +21,7 @@ class FakeProvider:
             event = FakeProvider.get_events_on_date(date)
             if event is not None:
                 events.extend(event)
-        return events
+        return FakeProvider.get_unique_most_recent_events(events)
 
     @staticmethod
     def get_events_on_date(date: datetime) -> Optional[EventList]:
@@ -42,3 +44,16 @@ class FakeProvider:
         #     raise Exception(f"Server not responding")
         # except requests.exceptions.RequestException:
         #     raise Exception(f"Server not responding")
+
+
+    @staticmethod
+    def get_unique_most_recent_events(events: EventList) -> EventList:
+        filtered_events: Dict[str, EventSummary] = {}
+        for event in events:
+            eventID = event.base_event_id
+            if eventID not in filtered_events:
+                filtered_events[eventID] = event
+            elif event.date_query > filtered_events[eventID].date_query:
+                filtered_events[eventID] = event
+
+        return [event for event in filtered_events.values()]

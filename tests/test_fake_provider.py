@@ -18,21 +18,17 @@ class TestFakeProvider(TestCase):
         events = FakeProvider.get_events_on_dates(date_list)
         # assert
         self.assertNotEqual(events, None)
-        self.assertEqual(7, len(events))
+        self.assertEqual(3, len(events))
 
         self.assertEqual("291", events[0].base_event_id)
         self.assertEqual("1591", events[1].base_event_id)
-        self.assertEqual("291", events[2].base_event_id)
-        self.assertEqual("1591", events[3].base_event_id)
-        self.assertEqual("291", events[4].base_event_id)
-        self.assertEqual("322", events[5].base_event_id)
-        self.assertEqual("1591", events[6].base_event_id)
+        self.assertEqual("322", events[2].base_event_id)
 
     def test_get_events_on_date(self):
         # arrange
         date = TestData.EVENT_DATE
         # act
-        events = FakeProvider.get_events_on_date(date)
+        events = FakeProvider().get_events_on_date(date)
         # assert
         self.assertNotEqual(events, None)
         self.assertEqual(len(events), 3)
