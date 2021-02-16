@@ -3,15 +3,12 @@ from typing import Dict
 from xml.etree import ElementTree
 from xml.etree.ElementTree import ParseError
 
-from requests import Response
-
 from models.events import EventList, EventSummary
 from utils.formatter import Formatter
 from utils.validator import Validator
 
 
 class XMLParser:
-
     @staticmethod
     def parse_text_on_date(text: str, date: datetime):
         tree = XMLParser.parse_str(text)
