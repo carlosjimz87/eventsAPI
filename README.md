@@ -71,8 +71,8 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 - [X] Complete XML parsing.
 - [ ] Asynchronous request to external provider.
 - [X] Adapt API to Open API spec.
-- [ ] Online events filtering.
-- [ ] Most recent events filtering.
+- [X] Online events filtering.
+- [X] Most recent events filtering.
 - [ ] Cache middleware.
 - [X] Complete routes endpoints and not-founds.
 - [/] Error handling and output messages.
