@@ -31,7 +31,7 @@ class EventsApi:
             # retrieve filtered events of most recent dates - synchronously
             events = FakeProvider.get_events_on_dates(query_dates)
 
-        return events
+        return FakeProvider.get_unique_most_recent_events(events)
 
     async def async_request(self, dates_to_query: List[datetime]) -> EventList:
         events = []
@@ -48,4 +48,4 @@ class EventsApi:
             for events_on_date in await asyncio.gather(*futures):
                 events.extend(events_on_date)
 
-        return FakeProvider.get_unique_most_recent_events(events)
+        return events
