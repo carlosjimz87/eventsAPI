@@ -11,7 +11,7 @@ class TestAPI(TestCase):
     # temporary we fetch duplicated events for different dates, this will be fixed in next iteration
     def test_get_available_events(self):
         eventList = EventsApi.get_available_events(self.STARTS_AT, self.ENDS_AT)
-        self.assertEqual(len(eventList), 7)
+        self.assertEqual(len(eventList), 3)
         pass
 
     def test_get_events_on_date(self):
@@ -27,3 +27,4 @@ class TestAPI(TestCase):
     def test_get_delta(self):
         delta = EventsApi.get_delta(self.ENDS_AT, self.STARTS_AT)
         self.assertEqual(delta, timedelta(366))
+

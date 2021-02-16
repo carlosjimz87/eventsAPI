@@ -2,12 +2,19 @@ from typing import Dict
 from xml.etree import ElementTree
 from xml.etree.ElementTree import ParseError
 
-from models.events import EventList
+from requests import Response
+
+from models.events import EventList, EventSummary
 from utils.formatter import Formatter
 from utils.validator import Validator
 
 
 class XMLParser:
+
+    @staticmethod
+    def parse_response(response: Response, date: str):
+        tree = XMLParser.parse_str(response.content)
+        return XMLParser.parse_base_event(tree, date)
 
     @staticmethod
     def parse_str(content: str) -> ElementTree.Element:
@@ -17,13 +24,14 @@ class XMLParser:
             print(e.text)
 
     @staticmethod
-    def parse_base_event(events, tree) -> EventList:
-
+    def parse_base_event(tree: ElementTree.Element, date: str) -> EventList:
+        events = []
         for base_event in tree.find("output"):
-            event = {**XMLParser.parse_event(base_event)}
+            event = {**XMLParser.parse_event(base_event), "date_query": date}
+
             if Validator.is_online(event):
                 event.pop("sell_mode")
-                events.append(event)
+                events.append(EventSummary(**event))
         return events
 
     @staticmethod

@@ -17,9 +17,10 @@ class TestXmlParser(TestCase):
         events: EventList = []
         tree09 = XMLParser.parse_str(XMLParser.sample_xml_09)
         # act
-        events = XMLParser.parse_base_event(events, tree09)
+        events = XMLParser.parse_base_event(tree09, "2020-02-02")
         # verify
         self.assertEqual(len(events), 3)
+        self.assertEqual(events[0].date_query, "2020-02-02")
 
     def test_parse_event(self):
         # arrange

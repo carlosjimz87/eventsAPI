@@ -13,4 +13,6 @@ class FakeProvider:
         try:
             return requests.get(FakeResponses.events_urls(date))
         except (MissingSchema, KeyError) as err:
-            print(f"Date {date} not found in provider")
+            pass
+            # print(f"Date {date} not found in provider")
+
