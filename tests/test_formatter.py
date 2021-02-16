@@ -1,14 +1,13 @@
 from unittest import TestCase
+
+from tests.test_data import TestData
 from utils.formatter import Formatter
-from datetime import datetime, timezone
 
 
 class TestFormatter(TestCase):
 
     def test_str_to_date(self):
-        formatted = Formatter.str_to_date("2021-02-08 00:00:00+00:00")
-        self.assertEqual(formatted, datetime(2021, 2, 8, 0, 0, 0, tzinfo=timezone.utc))
+        formatted = Formatter.str_to_date(TestData.STARTS_AT.strftime("%Y-%m-%dT%H:%M:%S%z"))
+        self.assertEqual(formatted, TestData.STARTS_AT)
 
-    def test_replace_utf_format(self):
-        formatted = Formatter.replace_utf_format("2021-02-08T00:00:00Z")
-        self.assertEqual(formatted, "2021-02-08T00:00:00+00:00")
+

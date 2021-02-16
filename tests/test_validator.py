@@ -2,37 +2,34 @@ from unittest import TestCase
 from datetime import datetime, timezone, timedelta
 
 from models.events import EventSummary
+from tests.test_data import TestData
 from utils.validator import Validator
-from utils.xml_parser import XMLParser
 
 
 class TestValidator(TestCase):
 
     def test_is_online(self):
-        event = {
-            "base_event_id": "291",
-            "sell_mode": "online",
-            "title": "Camela en concierto",
-            "start_date": "2020-07-01",
-            "start_time": "00:00:00",
-            "end_date": "2021-06-30",
-            "end_time": "20:00:00",
-            "max_price": "30.00",
-            "min_price": "15.00",
-        }
 
-        is_online = Validator.is_online(event)
+        is_online = Validator.is_online(TestData.Event)
         self.assertEqual(is_online, True)
 
     def test_is_valid_datetime(self):
-        date = datetime(year=2021, month=1, day=1, hour=10, minute=00, second=10, tzinfo=timezone.utc)
-        response_date = Validator.is_valid_date(date)
-        delta = date - response_date
+        response_date = Validator.is_valid_date(TestData.EVENT_DATE)
+        delta = TestData.EVENT_DATE - response_date
         self.assertEqual(delta, timedelta(0))
 
-    def test_is_valid_date_str(self):
-        pass
-        # dateStr = "2021-02-08T00:00:00Z"
-        # response_date = Validator.is_valid_date(dateStr)
-        # dateConv = response_date.strftime("%Y-%m-%dT%H:%M:%S%z")
-        # self.assertEqual(dateStr, dateConv)
+    def test_range_of_dates_with_dates(self):
+        days = Validator.range_of_dates(TestData.STARTS_AT, TestData.ENDS_AT)
+        self.assertEqual(len(days), 367)
+
+    def test_range_of_dates_without_dates(self):
+        days = Validator.range_of_dates(TestData.STARTS_AT)
+        self.assertEqual(len(days), 10)
+
+    def test_range_of_dates_without_days(self):
+        days = Validator.range_of_dates(TestData.STARTS_AT, days=7)
+        self.assertEqual(len(days), 7)
+
+    def test_delta(self):
+        delta = Validator.delta(TestData.STARTS_AT, TestData.ENDS_AT)
+        self.assertEqual(delta, timedelta(366))

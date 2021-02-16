@@ -1,10 +1,13 @@
+from datetime import datetime
 from xml.etree.ElementTree import Element
+
+from tests.test_data import TestData
 from utils.xml_parser import XMLParser
 
 
 class FakeResponses:
     @staticmethod
-    def events_urls(date):
+    def events_urls(date:datetime):
         dates_urls = {
             "2021-02-09": (
                 "https://gist.githubusercontent.com/miguelgf/"
@@ -22,15 +25,20 @@ class FakeResponses:
                 "5df981e215949ba04a342acc7a36a18ea1c1310a/response_2021-02-11.xml"
             ),
         }
-        return dates_urls[date]
+        try:
+            return dates_urls[str(date.date())]
+        except KeyError:
+            pass
 
     @staticmethod
-    def events_xml(date: str) -> Element:
+    def events_xml(date: datetime) -> Element:
         dates_xmls = {
-            "2021-02-09": XMLParser.parse_str(XMLParser.sample_xml_09),
-            "2021-02-10": XMLParser.parse_str(XMLParser.sample_xml_10),
-            "2021-02-11": XMLParser.parse_str(XMLParser.sample_xml_11),
+            "2021-02-09": XMLParser.parse_str(TestData.sample_xml_09),
+            "2021-02-10": XMLParser.parse_str(TestData.sample_xml_10),
+            "2021-02-11": XMLParser.parse_str(TestData.sample_xml_11),
 
         }
-
-        return dates_xmls[date]
+        try:
+            return dates_xmls[str(date.date())]
+        except KeyError:
+            pass
