@@ -1,7 +1,6 @@
+from datetime import timedelta
 from unittest import TestCase
-from datetime import datetime, timezone, timedelta
 
-from models.events import EventSummary
 from tests.test_data import TestData
 from utils.validator import Validator
 

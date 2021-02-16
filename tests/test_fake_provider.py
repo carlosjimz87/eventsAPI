@@ -1,9 +1,7 @@
-from datetime import datetime, timedelta
+from unittest import TestCase
+from unittest.mock import patch
 
 from providers.fake_provider import FakeProvider, FakeResponses
-from unittest import TestCase
-from unittest.mock import Mock, patch
-
 from tests.test_data import TestData
 from utils.validator import Validator
 from utils.xml_parser import XMLParser

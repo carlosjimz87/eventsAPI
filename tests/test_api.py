@@ -1,5 +1,5 @@
-from datetime import datetime, timezone, timedelta
 from unittest import TestCase
+
 from api.events_api import EventsApi
 from tests.test_data import TestData
 

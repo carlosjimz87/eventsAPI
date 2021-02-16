@@ -1,6 +1,5 @@
 from unittest import TestCase
 
-from models.events import EventList
 from tests.test_data import TestData
 from utils.xml_parser import XMLParser
 

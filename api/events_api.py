@@ -1,5 +1,5 @@
-from datetime import datetime, timedelta
-from typing import Union, Dict, List
+from datetime import datetime
+from typing import Union, Dict
 
 from models.events import EventList, EventSummary
 from providers.fake_provider import FakeProvider

@@ -1,14 +1,14 @@
-from fastapi.params import Query
 from datetime import datetime
+from typing import Optional
 
+from fastapi import APIRouter
 from starlette.responses import RedirectResponse
 
-from models.queries import StartsSearchQuery, EndsSearchQuery
-from typing import Optional
-from fastapi import APIRouter
 from api.events_api import EventsApi
+from models.errors import GenericError
+from models.queries import StartsSearchQuery, EndsSearchQuery
 from models.responses import BaseResponse
-from models.errors import GenericError, MissingDateParameter
+
 router = APIRouter()
 
 
