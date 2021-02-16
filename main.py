@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-
-from api.events_api import EventsApi
+import uvicorn
+from api.router import router
 
 app = FastAPI(
     title="Events API Fever",
@@ -8,8 +8,7 @@ app = FastAPI(
     version="1.0.0"
 )
 
+app.include_router(router)
 
-@app.get("/search")
-async def get_events():
-    response = EventsApi().get_available_events("2021-02-09")
-    return response
+if __name__ == "__main__":
+    uvicorn.run(app)

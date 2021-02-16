@@ -33,44 +33,55 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 
 ```bash
 --main.py
+--Makefile
+--poetry.lock
+--pyproject.toml
+--requirements.txt
 |--api
 |   |--events_api.py
+|   |--router.py
+|
+|--models
+|   |--errors.py
+|   |--events.py
+|   |--queries.py
+|   |--responses.py
 |
 |--providers
 |   |--fake_provider.py
 |   |__fake_responses.py
 |
 |--tests
-|   |--coverage
-|   |--test_eventapifever.py
+|   |--test_api.py
 |   |--test_fake_provider.py
-|   |--test_utils.py
+|   |--test_validator.py
+|   |--test_formatter.py
+|   |--test_xml_parser.py
 |
-|--assets
-    |--xml
-        |--mock_response_09.xml
-        |--mock_response_10.xml
-        |--mock_response_11.xml
+|--utils
+    |--mock_response.py
+    |--mock_response_10.py
+    |--mock_response_11.py
 ```
 
 ## Tasks
 
 - [X] Basic API with basic XML parsing.
-- [ ] Initial refactoring for better scalability.
-- [ ] Complete XML parsing.
+- [X] Initial refactoring for better scalability.
+- [X] Complete XML parsing.
 - [ ] Asynchronous request to external provider.
-- [ ] Adapt API to Open API spec.
+- [X] Adapt API to Open API spec.
 - [ ] Online events filtering.
 - [ ] Most recent events filtering.
 - [ ] Cache middleware.
-- [ ] Complete routes endpoints and not-founds.
-- [ ] Error handling and output messages.
-- [ ] Testing and mocking.
+- [X] Complete routes endpoints and not-founds.
+- [/] Error handling and output messages.
+- [/] Testing and mocking.
 - [ ] Final refactoring for better scalability.
 - [ ] Code styling, comments, and other improvements.
 - [ ] Github actions.
-- [ ] Dockerization.
-- [ ] Performance recommendations.
+- [ ] Deployment setup.
+- [X] Performance recommendations.
 - [ ] Security recommendations.
 - [ ] Complete documentation.
 

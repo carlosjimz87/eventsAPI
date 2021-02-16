@@ -2,6 +2,8 @@ from providers.fake_provider import FakeProvider, FakeResponses
 from unittest import TestCase
 from unittest.mock import Mock
 
+from utils.xml_parser import XMLParser
+
 
 class TestFakeProvider(TestCase):
     DATE = "2021-02-09"
@@ -11,10 +13,11 @@ class TestFakeProvider(TestCase):
         # arrange
         mock_response = FakeResponses.events_xml(self.DATE)
         # act
-        content, status = FakeProvider.events_on_date(self.DATE)
+        response = FakeProvider.events_on_date(self.DATE)
+        element = XMLParser.parse_str(response.content)
         # assert
-        self.assertEqual(status, self.CODE)
-        self.assertEqual(content.tag, mock_response.tag)
+        self.assertEqual(response.status_code, self.CODE)
+        self.assertEqual(element.tag, mock_response.tag)
 
     '''
     If we had a REAL Provider we should be mocking it to test it correctly.
@@ -25,17 +28,6 @@ class TestFakeProvider(TestCase):
     -regardless that in this case is not necessary- to demonstrate how we
     would do it for a real one.
     '''
-
-    # @pytest.mark.parametrize(
-    #     "date,expectation",
-    #     [
-    #         ("string", does_not_raise()),
-    #         ("", does_not_raise()),
-    #         (0, pytest.raises(problems.helpers.InvalidArgs)),
-    #         (None, pytest.raises(problems.helpers.InvalidArgs)),
-    #     ],
-    # )
-
     def test_mock_fake_provider_events(self):
         # arrange
         mock_response = FakeResponses.events_xml(self.DATE)
@@ -43,7 +35,9 @@ class TestFakeProvider(TestCase):
         mock_events_api.return_value.status = self.CODE
         mock_events_api.return_value.json.content = mock_response
         # act
-        content, status = FakeProvider.events_on_date(self.DATE)
+        response = FakeProvider.events_on_date(self.DATE)
+
+        element = XMLParser.parse_str(response.content)
         # assert
-        self.assertEqual(status, self.CODE)
-        self.assertEqual(content.tag, mock_response.tag)
+        self.assertEqual(response.status_code, self.CODE)
+        self.assertEqual(element.tag, mock_response.tag)

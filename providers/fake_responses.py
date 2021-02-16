@@ -1,4 +1,5 @@
-from utils.xml_parser import XMLParser, Element
+from xml.etree.ElementTree import Element
+from utils.xml_parser import XMLParser
 
 
 class FakeResponses:
@@ -26,9 +27,9 @@ class FakeResponses:
     @staticmethod
     def events_xml(date: str) -> Element:
         dates_xmls = {
-            "2021-02-09": XMLParser.parse_file(filename=XMLParser.MOCK_RESPONSE_09),
-            "2021-02-10": XMLParser.parse_file(filename=XMLParser.MOCK_RESPONSE_10),
-            "2021-02-11": XMLParser.parse_file(filename=XMLParser.MOCK_RESPONSE_11),
+            "2021-02-09": XMLParser.parse_str(XMLParser.sample_xml_09),
+            "2021-02-10": XMLParser.parse_str(XMLParser.sample_xml_10),
+            "2021-02-11": XMLParser.parse_str(XMLParser.sample_xml_11),
 
         }
 

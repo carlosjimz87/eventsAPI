@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "EventAPIFever"
 version = "0.1.0"
-description = ""
+description = "This is a Python based API to retrieve events information from an external provider."
 authors = ["Carlos Jiménez <carlosjimz87@gmail.com>"]
 
 [tool.poetry.dependencies]

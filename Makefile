@@ -8,7 +8,7 @@ build-requirements:
 
 .PHONY: run
 run:
-	poetry run uvicorn main:app
+	python main.py
 
 
 .PHONY: test
