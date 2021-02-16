@@ -82,7 +82,7 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 - [ ] Github actions.
 - [X] Deployment setup.
 - [X] Performance recommendations.
-- [ ] Security recommendations.
+- [X] Security recommendations.
 - [ ] Complete documentation.
 
 
@@ -96,9 +96,15 @@ To solve this, we implement `asynchronous requests` for each date and put them i
 
 Now, this brings a new problem. By analyzing the sample data we realized that several events have the same ID in multiple days. And, events now are gathered simultaneously from multiple threads so this means that they arrive unordered to the storage container. This jeopardizes the requirement of having only the most recent event of one unique ID. Of course, we can sort all the events after that, but this will throw down all the good performance we could achieve with the asynchronous-multithreading requests.
 
-To solve this new issue, we can use an efficient sorting method mixed with a **memoization** technique. If we keep track of the events we are retrieving and we only save the ones with identical ID and only if they have a more recent date, the number of saved events will be considerably less. 
+To solve this new issue, we can use an efficient sorting method mixed with a **memoization** technique. If we keep track of the events we are retrieving, and we only save the ones with identical ID and only if they have a more recent date, the number of saved events will be considerably less. 
 
 There is another possible improvement to apply, and that is a *cache middleware* to avoid unnecessary requests.
+
+## Security Recommendations
+
+On the *implementation side* a real api like this, would need some way of authorization and tokenization of endpoints, an acceptable approach could be using OAUTH2 and JWT tokens. Also, it needs protection against XSS & SQL Injections and ManInTheMiddle attacks, for this is important to extend validations, create secure SQL queries, secure string concatenation and encode data before send it via HTTP. Besides, these measures might help to mitigate the data leaks and contributes with data privacy and integrity. One of the most dangerous attacks to face are DDOS attacks, to help with that API should implement efficient pagination on large responses.
+
+On other hand, in the *infrastructure side*, some of the most important protections are load balancing, proxies, black/white lists, id secularization, OAUTH servers and others.
 
 ## Acknowledgments
 
