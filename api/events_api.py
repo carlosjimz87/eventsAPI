@@ -2,15 +2,15 @@ import asyncio
 import concurrent.futures
 from datetime import datetime
 from typing import Union, List
-from utils.constants import DEFAULT_WORKERS, USE_WORKERS
 from models.events import EventList
 from providers.fake_provider import FakeProvider
 from utils.validator import Validator
 
 
 class EventsApi:
-    def __init__(self, max_workers: int = DEFAULT_WORKERS) -> None:
+    def __init__(self, use_workers: bool, max_workers: int) -> None:
         self.max_workers = max_workers
+        self.use_workers = use_workers
 
     def get_available_events(self, starts_at: Union[str, datetime], ends_at: Union[str, datetime]) -> EventList:
         starts_at = Validator.is_valid_date(starts_at)
@@ -19,8 +19,7 @@ class EventsApi:
         # getting all days to make the search
         query_dates = Validator.range_of_dates(starts_at, ends_at)
 
-        events = []
-        if USE_WORKERS:
+        if self.use_workers:
             # retrieve filtered events of most recent dates - asynchronously
             loop = asyncio.new_event_loop()
             asyncio.set_event_loop(loop)

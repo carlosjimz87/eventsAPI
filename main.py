@@ -1,5 +1,8 @@
-from fastapi import FastAPI
 import uvicorn
+import os
+from dotenv import load_dotenv
+from fastapi import FastAPI
+
 from api.router import router
 
 app = FastAPI(
@@ -12,4 +15,5 @@ app = FastAPI(
 app.include_router(router)
 
 if __name__ == "__main__":
+    load_dotenv()
     uvicorn.run(app)

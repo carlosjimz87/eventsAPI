@@ -1,5 +1,5 @@
 from unittest import TestCase
-
+import os
 from api.events_api import EventsApi
 from tests.test_data import TestData
 
@@ -7,7 +7,10 @@ from tests.test_data import TestData
 class TestAPI(TestCase):
 
     def test_get_available_events(self):
-        events = EventsApi().get_available_events(TestData.STARTS_AT, TestData.ENDS_AT)
+        events = EventsApi(
+            use_workers=os.environ.get("USE_WORKERS", True),
+            max_workers=os.environ.get("MAX_WORKERS", 4)
+        ).get_available_events(TestData.STARTS_AT, TestData.ENDS_AT)
 
         self.assertNotEqual(events, None)
         self.assertEqual(3, len(events))

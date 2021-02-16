@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Optional
-
+import os
 from fastapi import APIRouter
 from starlette.responses import RedirectResponse
 
@@ -22,7 +22,10 @@ async def search(starts_at: Optional[datetime] = StartsSearchQuery,
                  ends_at: Optional[datetime] = EndsSearchQuery
                  ):
 
-    data = EventsApi().get_available_events(starts_at, ends_at)
+    data = EventsApi(
+        use_workers=os.environ.get("USE_WORKERS", True),
+        max_workers=os.environ.get("MAX_WORKERS", 4)
+        ).get_available_events(starts_at, ends_at)
     return BaseResponse(data=data, error=None)
 
 
