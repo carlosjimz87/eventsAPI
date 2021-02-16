@@ -4,6 +4,7 @@ from xml.etree.ElementTree import ParseError
 
 from models.events import EventList
 from utils.formatter import Formatter
+from utils.validator import Validator
 
 
 class XMLParser:
@@ -17,9 +18,10 @@ class XMLParser:
 
     @staticmethod
     def parse_base_event(events, tree) -> EventList:
+
         for base_event in tree.find("output"):
             event = {**XMLParser.parse_event(base_event)}
-            if event.get("sell_mode") == "online":
+            if Validator.is_online(event):
                 event.pop("sell_mode")
                 events.append(event)
         return events

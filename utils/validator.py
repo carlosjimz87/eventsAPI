@@ -1,11 +1,20 @@
 from datetime import datetime
-from typing import  Union
+from typing import Union, Dict
 
 from models.errors import MissingDateParameter
 from utils.formatter import Formatter
 
 
 class Validator:
+
+    @staticmethod
+    def is_online(event: Dict) -> bool:
+        try:
+            return event["sell_mode"] == "online"
+        except KeyError:
+            print("Event has no sell_mode attribute.")
+
+
     @staticmethod
     def is_valid_date(date: Union[str, datetime]) -> datetime:
 

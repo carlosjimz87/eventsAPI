@@ -1,3 +1,4 @@
+from datetime import datetime
 
 from requests import Response
 from requests.exceptions import MissingSchema
@@ -11,5 +12,5 @@ class FakeProvider:
     def events_on_date(date: str) -> Response:
         try:
             return requests.get(FakeResponses.events_urls(date))
-        except MissingSchema:
+        except (MissingSchema, KeyError) as err:
             print(f"Date {date} not found in provider")
