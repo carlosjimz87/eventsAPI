@@ -95,7 +95,7 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 - [X] Error handling and output messages.**
 - [X] Testing and mocking.**
 - [ ] Cache middleware.
-- [ ] Complete documentation.
+- [X] Complete documentation.
 
 ** partially finished tasks (see **Pending Issues** for more)
 ## Performance Challenges
