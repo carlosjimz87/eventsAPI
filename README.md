@@ -82,7 +82,7 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 - [X] Initial refactoring for better scalability.
 - [X] Complete XML parsing.
 - [X] Asynchronous request to external provider.
-- [X] Adapt API to Open API spec.
+- [X] Adapt API to Open API spec. **
 - [X] Online events filtering.
 - [X] Most recent events filtering.
 - [X] Complete routes endpoints and not-founds.
@@ -97,7 +97,7 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 - [ ] Cache middleware.
 - [ ] Complete documentation.
 
-** partially finished tasks
+** partially finished tasks (see **Pending Issues** for more)
 ## Performance Challenges
 
 Because the external provider only gives the events for one specific date, is our responsibility to find all available events in a range of dates. According to the requirements, the endpoint of our API should receive the `starts_at` and `ends_at` params and then return the corresponding events within this timeframe.
@@ -110,11 +110,11 @@ Now, this brings a new problem. By analyzing the sample data we realized that se
 
 To solve this new issue, we can use an efficient sorting method mixed with a **memoization** technique. If we keep track of the events we are retrieving, and we only save the ones with identical ID and only if they have a more recent date, the number of saved events will be considerably less. 
 
-There is another possible improvement to apply, and that is a *cache middleware* to avoid unnecessary requests.
+There is another possible improvement to apply, and that is a **cache middleware** to avoid unnecessary requests.
 
 ## Security Recommendations
 
-On the *implementation side* a real api like this, would need some way of authorization and tokenization of endpoints, an acceptable approach could be using OAUTH2 and JWT tokens. Also, it needs protection against XSS & SQL Injections and ManInTheMiddle attacks, for this is important to extend validations, create secure SQL queries, secure string concatenation and encode data before send it via HTTP. Besides, these measures might help to mitigate the data leaks and contributes with data privacy and integrity. One of the most dangerous attacks to face are DDOS attacks, to help with that API should implement efficient pagination on large responses.
+On the *implementation side* a real api like this, would need some way of authorization and tokenization of endpoints, an acceptable approach could be using **OAUTH2** and **JWT tokens**. Also, it needs protection against XSS & SQL Injections and ManInTheMiddle attacks, for this is important to extend validations, create secure SQL queries, secure string concatenation and encode data before send it via HTTP. Besides, these measures might help to mitigate the data leaks and contributes with data privacy and integrity. One of the most dangerous attacks to face are DDOS attacks, to help with that API should implement efficient pagination on large responses.
 
 On other hand, in the *infrastructure side*, some of the most important protections are load balancing, proxies, black/white lists, id secularization, OAUTH servers and others.
 
@@ -125,6 +125,8 @@ Because of the time constraints, some tasks were partially finished in our consi
 In general, the code is good enough for this kind of project, but we think that some principles and good practices could be taken to a higher level. The asynchronous requests could be more efficient as the loop with nested requests is not the best solution. Comments and style can definately be improved and finally, the error handling needs a more concise and well-structured approach.
 
 Testing and mock of objects can be and should be done thoroughly to really get good quality on our code. More test cases are needed in all modules and methods because only the basic tests were performed. By using better mocks and parameterized tests we can get better coverage.
+
+Also, the adaption to OpenAPI specification is slightly incomplete. Some unnecessary models of the Schema could not be hidden.
 
 Lastly, cache middleware was not implemented also because of a lack of time, but as we clarify earlier could be a solid performance catalyzer.
 ## Acknowledgments
