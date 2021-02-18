@@ -3,7 +3,7 @@
 ![CI](https://github.com/carlosjimz87/eventsAPI/workflows/CI/badge.svg)
 ![python](https://img.shields.io/badge/python-3.9.1-purple?logo=python)
 
-This is an API to gather events summary given a timeframe of dates. Is made with [FastAPI](https://fastapi.tiangolo.com/) and is use important features of the [Python](https://www.python.org/) language such as *annotations*, *asynchronous tasks*, *multithreading*, *pydantic classes*, *unit testing* and others.
+This is an API to gather events summaries given a timeframe of dates. Is made with [FastAPI](https://fastapi.tiangolo.com/) and it use important features of the [Python](https://www.python.org/) language such as *annotations*, *asynchronous tasks*, *multithreading*, *pydantic classes*, *unit testing* and others.
 
 ## Installation
 
@@ -45,12 +45,8 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 
 ## Project Structure
 
-```bash
+```
 --main.py
---Makefile
---poetry.lock
---pyproject.toml
---requirements.txt
 |--api
 |   |--events_api.py
 |   |--router.py
@@ -67,15 +63,17 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 |
 |--tests
 |   |--test_api.py
+|   |--test_data.py
 |   |--test_fake_provider.py
-|   |--test_validator.py
 |   |--test_formatter.py
+|   |--test_validator.py
 |   |--test_xml_parser.py
 |
 |--utils
-    |--mock_response.py
-    |--mock_response_10.py
-    |--mock_response_11.py
+    |--formatter.py
+    |--remove_errors.py
+    |--validator.py
+    |--xml_parser.py
 ```
 
 ## Tasks
@@ -87,19 +85,19 @@ see in our endpoint the events *291*, *322* and *1591* with their latest known v
 - [X] Adapt API to Open API spec.
 - [X] Online events filtering.
 - [X] Most recent events filtering.
-- [ ] Cache middleware.
 - [X] Complete routes endpoints and not-founds.
-- [/] Error handling and output messages.
-- [/] Testing and mocking.
-- [/] Final refactoring for better scalability.
-- [/] Code styling, comments, and other improvements.
-- [ ] Github actions.
+- [X] Final refactoring for better scalability.
+- [X] Github actions.
 - [X] Deployment setup.
 - [X] Performance recommendations.
 - [X] Security recommendations.
+- [X] Code styling, comments, and other improvements.**
+- [X] Error handling and output messages.**
+- [X] Testing and mocking.**
+- [ ] Cache middleware.
 - [ ] Complete documentation.
 
-
+** partially finished tasks
 ## Performance Challenges
 
 Because the external provider only gives the events for one specific date, is our responsibility to find all available events in a range of dates. According to the requirements, the endpoint of our API should receive the `starts_at` and `ends_at` params and then return the corresponding events within this timeframe.
@@ -120,6 +118,15 @@ On the *implementation side* a real api like this, would need some way of author
 
 On other hand, in the *infrastructure side*, some of the most important protections are load balancing, proxies, black/white lists, id secularization, OAUTH servers and others.
 
+## Pending Issues
+
+Because of the time constraints, some tasks were partially finished in our consideration. Although we want to explain what should be done in the following lines.
+
+In general, the code is good enough for this kind of project, but we think that some principles and good practices could be taken to a higher level. The asynchronous requests could be more efficient as the loop with nested requests is not the best solution. Comments and style can definately be improved and finally, the error handling needs a more concise and well-structured approach.
+
+Testing and mock of objects can be and should be done thoroughly to really get good quality on our code. More test cases are needed in all modules and methods because only the basic tests were performed. By using better mocks and parameterized tests we can get better coverage.
+
+Lastly, cache middleware was not implemented also because of a lack of time, but as we clarify earlier could be a solid performance catalyzer.
 ## Acknowledgments
 
 We want to thanks to the [FastAPI team](https://github.com/tiangolo/fastapi/graphs/contributors) for facilitating the development of this project.
