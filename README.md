@@ -2,6 +2,17 @@
 
 This is an API to gather events summary given a timeframe of dates. Is made with [FastAPI](https://fastapi.tiangolo.com/) and is use important features of the [Python](https://www.python.org/) language such as *annotations*, *asynchronous tasks*, *multithreading*, *pydantic classes*, *unit testing* and others.
 
+## Installation
+
+`make setup`
+
+## Tests
+
+`make test`
+
+## Run
+
+`make run`
 
 ## Description
 
