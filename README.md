@@ -1,5 +1,8 @@
 # **Events API Fever**
 
+![CI](https://github.com/carlosjimz87/eventsAPI/workflows/CI/badge.svg)
+![python](https://img.shields.io/badge/python-3.9.1-purple?logo=python)
+
 This is an API to gather events summary given a timeframe of dates. Is made with [FastAPI](https://fastapi.tiangolo.com/) and is use important features of the [Python](https://www.python.org/) language such as *annotations*, *asynchronous tasks*, *multithreading*, *pydantic classes*, *unit testing* and others.
 
 ## Installation
